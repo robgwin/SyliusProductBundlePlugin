@@ -1,5 +1,5 @@
 {
-    "name": "bitbag/product-bundle-plugin",
+    "name": "robgwin/product-bundle-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "Product bundle for Sylius.",
@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3",
         "sylius/sylius": "^1.7",
-        "symfony/messenger": "^4.3"
+        "symfony/messenger": "^5.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
