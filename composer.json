@@ -1,5 +1,5 @@
 {
-    "name": "robgwin/product-bundle-plugin",
+    "name": "bitbag/product-bundle-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "Product bundle for Sylius.",
