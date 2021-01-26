@@ -6,7 +6,14 @@ namespace BitBag\SyliusProductBundlePlugin\Entity;
 
 trait ProductBundlesAwareTrait
 {
-    /** @var ProductBundleInterface */
+    /**
+     * @var ProductBundleInterface
+     * @ORM\OneToOne(
+     *     targetEntity="BitBag\SyliusProductBundlePlugin\Entity\ProductBundleInterface",
+     *     mappedBy="product",
+     *     cascade={"all"}
+     * )
+    **/
     protected $productBundle;
 
     public function getProductBundle(): ?ProductBundleInterface

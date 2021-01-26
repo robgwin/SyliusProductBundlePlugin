@@ -83,25 +83,6 @@ This plugin allows you to create new products by bundling existing products toge
     }
     ```
    
-   Mapping (XML):
-   
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-   >
-       <entity name="App\Entity\Product\Product" table="sylius_product">
-           <one-to-one field="productBundle" target-entity="BitBag\SyliusProductBundlePlugin\Entity\ProductBundleInterface" mapped-by="product">
-               <cascade>
-                   <cascade-all/>
-               </cascade>
-           </one-to-one>
-       </entity>
-   </doctrine-mapping>
-   ```
-   
 6. Extend `OrderItem` (including Doctrine mapping):
 
     ```php
@@ -128,25 +109,6 @@ This plugin allows you to create new products by bundling existing products toge
    
    }
     ```
-   
-   Mapping (XML):
-   
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-   >
-       <entity name="App\Entity\Order\OrderItem" table="sylius_order_item">
-           <one-to-many field="productBundleOrderItems" target-entity="BitBag\SyliusProductBundlePlugin\Entity\ProductBundleOrderItem" mapped-by="orderItem" >
-               <cascade>
-                   <cascade-all/>
-               </cascade>
-           </one-to-many>
-       </entity>
-   </doctrine-mapping>
-   ```
 
 7. Add configuration for extended product, order item and product variant repository:
 
@@ -167,30 +129,11 @@ This plugin allows you to create new products by bundling existing products toge
                    model: App\Entity\Order\OrderItem
     
     ```
-
-8. Add 'Create/Bundle' to product grid configuration:
-
-    ```yaml
-    # config/packages/_sylius.yaml
     
-    sylius_grid:
-        grids:
-            sylius_admin_product:
-                actions:
-                    main:
-                        create:
-                            links:
-                                bundle:
-                                    label: bitbag_sylius_product_bundle.ui.bundle
-                                    icon: plus
-                                    route: bitbag_product_bundle_admin_product_create_bundle
-    
-    ```
-    
-9. Finish the installation by updating the database schema and installing assets:
+8. Run database migration:
 
     ```
-    $ bin/console doctrine:migrations:diff
+    $ cp vendor/bitbag/product-bundle-plugin/src/Migrations/Version20210126022620.php
     $ bin/console doctrine:migrations:migrate
     ```
 
